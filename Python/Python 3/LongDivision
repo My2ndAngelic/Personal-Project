@@ -1,0 +1,21 @@
+# Algorithms + Data Structures = Program
+# Niklaus Wirth 1976
+
+def main():
+    n = 10
+    d = [0 for i in range(n + 1)]
+
+    for k in range(n):
+        r = 0
+        print(".", end="")
+        for i in range(k):
+            r = 10 * r + d[i]
+            d[i] = r // 2
+            r = r - 2 * d[i]
+            print(d[i], end="")
+        d[k] = 5
+        print(d[k])
+
+
+if __name__ == "__main__":
+    main()
