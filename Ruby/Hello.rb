@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 print "Your name: "
 name = gets.chomp("")
-puts "Hello, #{name}! I'm John."
+print "Hello, #{name}! I'm John."
