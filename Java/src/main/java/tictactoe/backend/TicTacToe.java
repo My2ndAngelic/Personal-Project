@@ -1,6 +1,7 @@
 package tictactoe.backend;
 
 import com.google.common.base.Strings;
+import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
 import java.time.Instant;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class TicTacToe {
+public @Data class TicTacToe {
     private final List<String> turnHistory;
     private final List<String[][]> boardHistory;
     private final int boardSize;
@@ -22,9 +23,9 @@ public class TicTacToe {
     private Instant endTime;
     private Instant startTime;
 
-    /// <summary>
-    ///     Default constructor
-    /// </summary>
+    /**
+     * Default constructor
+     */
     public TicTacToe() {
         currentPlayer = 0;
         startTime = Instant.now();
@@ -40,10 +41,12 @@ public class TicTacToe {
         boardHistory = new ArrayList<>();
     }
 
-    /// <summary>
-    ///     Constructor with size parameter
-    /// </summary>
-    /// <param name="size">Size of the board</param>
+
+    /**
+     * Constructor with size parameter
+     *
+     * @param size Size of board n-by-n
+     */
     public TicTacToe(int size) {
         currentPlayer = 0;
         startTime = Instant.now();
@@ -373,7 +376,7 @@ public class TicTacToe {
     }
 
     private String getSymbol(int currentPlayer) {
-        switch (currentPlayer) {
+        switch (currentPlayer % 2) {
             case 0 -> {
                 return p1Symbol;
             }

@@ -7,6 +7,7 @@ module me.my2ndangelic {
     requires org.kordamp.ikonli.javafx;
     requires org.apache.commons.lang3;
     requires com.google.common;
+    requires lombok;
 
     opens tictactoe.gui to javafx.fxml;
     exports tictactoe.gui;

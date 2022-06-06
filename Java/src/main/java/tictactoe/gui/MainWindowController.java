@@ -1,14 +1,26 @@
 package tictactoe.gui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 
 public class MainWindowController {
-    @FXML
-    private Label welcomeText;
 
     @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    protected void onButtonClick(MouseEvent event) {
+        Button btn = (Button) event.getSource();
+        btn.setDisable(true);
+    }
+
+    @FXML
+    protected void onMenuNewClick() {
+
+    }
+
+    @FXML
+    protected void onMenuExitClick() {
+        Platform.exit();
+        System.exit(0);
     }
 }
