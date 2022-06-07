@@ -1,12 +1,12 @@
 class Employee:
-    def __init__(self, idNo, name, age):
-        self.idNo = idNo
+    def __init__(self, id_no, name, age):
+        self.idNo = id_no
         self.name = name
         self.age = age
 
     def __str__(self):
         return f"Employee number {self.idNo}: {self.name}, {self.age} years old."
-    
+
 
 def main():
     print("Hello ", sep="", end="")

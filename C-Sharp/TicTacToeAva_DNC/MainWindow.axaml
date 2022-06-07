@@ -1,0 +1,181 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Width="750" Height="700"
+        x:Class="TicTacToeAva_DNC.MainWindow"
+        Title="TicTacToeAva_DNC"
+        Icon="Resources/sample.ico">
+    
+    <Grid ColumnDefinitions="20,*,20,*,20" RowDefinitions="20,20,*,20,*,20">
+
+        <!-- If the menu is weird looking, please take a look at 
+        https://www.tenforums.com/tutorials/68038-set-menus-open-aligned-left-right-windows-10-a.html 
+or archive link: https://web.archive.org/web/20220527214727/https://www.tenforums.com/tutorials/68038-set-menus-open-aligned-left-right-windows-10-a.html-->
+        <Menu Grid.ColumnSpan="10">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <DockPanel HorizontalAlignment="Left" />
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+            <MenuItem Header="_File">
+                <MenuItem Header="_New">
+                    <MenuItem Header="_PvP" Click="MenuNewPvP_OnClick" />
+                    <MenuItem Header="_PvE" Click="MenuNewPvE_OnClick" />
+                    <MenuItem Header="_EvP" Click="MenuNewEvP_OnClick" />
+                    <MenuItem Header="_EvE" Click="MenuNewEvE_OnClick" />
+                </MenuItem>
+                <Separator />
+                <MenuItem Name="MenuSave" Header="_Save" Click="MenuSave_OnClick" />
+                <MenuItem Header="_Select Folder" Click="MenuSelectFolder_OnClick" />
+                <Separator />
+                <MenuItem Click="MenuExit_OnClick" Header="_Exit" />
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Click="MenuAbout_OnClick" Header="_About" />
+            </MenuItem>
+        </Menu>
+
+        <Grid Grid.Row="2" Grid.Column="1" RowSpan="3" RowDefinitions="30,*">
+            <!-- <Grid.Resources> -->
+            <!--     <Style Target="{x:Type Grid}"> -->
+            <!--         <Setter Property="Margin" Value="0 0" /> -->
+            <!--     </Style> -->
+            <!-- </Grid.Resources> -->
+            <TextBlock Text="Play Area" TextAlignment="Center" FontSize="15" Foreground="Chocolate" FontWeight="Bold" />
+            <!-- <Button Content="" Foreground="Aqua" Background="Aqua"/> -->
+            <Grid Name="FieldOfPlay" Grid.Row="1" Grid.Column="0" ColumnDefinitions="*,*,*" RowDefinitions="*,*,*">
+                <Button Grid.Row="0" Grid.Column="0" 
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch" 
+                        Margin="10" />
+                <Button Grid.Row="0 " Grid.Column="1" 
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch" 
+                        Margin="10" />
+                <Button Grid.Row="0 " Grid.Column="2" 
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch" 
+                        Margin="10" />
+                <Button Grid.Row="1 " Grid.Column="0" 
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch" 
+                        Margin="10" />
+                <Button Grid.Row="1 " Grid.Column="1" 
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch" 
+                        Margin="10" />
+                <Button Grid.Row="1 " Grid.Column="2" 
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch" 
+                        Margin="10" />
+                <Button Grid.Row="2 " Grid.Column="0" 
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch" 
+                        Margin="10" />
+                <Button Grid.Row="2 " Grid.Column="1" 
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch" 
+                        Margin="10" />
+                <Button Grid.Row="2 " Grid.Column="2" 
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch" 
+                        Margin="10" />
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="3" RowDefinitions="30,*">
+            <TextBlock FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Top"
+                       TextAlignment="Left" FontStyle="Normal" Foreground="Teal" TextWrapping="Wrap" FontWeight="Bold"
+                       Text="Move History" />
+            <ListBox Name="ListMoveHistory" Grid.Row="1" FontSize="15" Margin="10,10,10,10">
+                <!-- https://stackoverflow.com/questions/1722456/make-listbox-items-in-wpf-not-selectable  -->
+                <!-- <ListBox.ItemContainerStyle> -->
+                <!--     <Style TargetType="{x:Type ListBoxItem}"> -->
+                <!--         <Setter Property="Focusable" Value="False" /> -->
+                <!--     </Style> -->
+                <!-- </ListBox.ItemContainerStyle> -->
+            </ListBox>
+        </Grid>
+
+        <!-- <Grid Grid.Row="4" Grid.Column="1"> -->
+        <!--     <Grid.RowDefinitions> -->
+        <!--         <RowDefinition Height="30" /> -->
+        <!--         <RowDefinition Height="*" /> -->
+        <!--     </Grid.RowDefinitions> -->
+        <!--     <TextBlock Text="Status" TextAlignment="Center" FontSize="15" -->
+        <!--                FontWeight="Bold" Foreground="Crimson" /> -->
+        <!-- </Grid> -->
+
+        <Grid Grid.Row="4" Grid.Column="3" RowDefinitions="30,*,*,*">
+            <TextBlock Grid.Row="0" FontSize="15"
+                       TextAlignment="Center" FontStyle="Normal" Foreground="Teal" TextWrapping="Wrap"
+                       FontWeight="Bold" Text="System Information" />
+            <TextBlock Grid.Row="1" Name="TimeInfo" FontSize="15"
+                       VerticalAlignment="Center"
+                       TextAlignment="Left" FontStyle="Normal" Foreground="Navy" TextWrapping="Wrap"
+                       Text="Time Information" />
+            <TextBox Grid.Row="2" Name="SysInfo" FontSize="15" Foreground="DarkBlue" VerticalAlignment="Center"
+                     TextAlignment="Left" IsReadOnly="True" BorderThickness="0" TextWrapping="Wrap" Text="SysInfo" />
+            <TextBlock Name="GameStatus" Grid.Row="3" Text="Status" TextAlignment="Center"
+                       VerticalAlignment="Center" FontSize="15" TextWrapping="Wrap" Foreground="Navy" />
+        </Grid>
+
+        <!-- <Grid Grid.Row="6" Grid.Column="1" > -->
+        <!--     <Grid.RowDefinitions> -->
+        <!--         <RowDefinition Height="30" /> -->
+        <!--         <RowDefinition Height="30" /> -->
+        <!--     </Grid.RowDefinitions> -->
+        <!--     <TextBlock FontSize="15" Text="New Game" FontWeight="Bold" TextAlignment="Center" Foreground="Brown" /> -->
+        <!--     <Grid Grid.Row="1"> -->
+        <!--         <Grid.ColumnDefinitions> -->
+        <!--             <ColumnDefinition Width="*" /> -->
+        <!--             <ColumnDefinition Width="20" /> -->
+        <!--             <ColumnDefinition Width="*" /> -->
+        <!--             <ColumnDefinition Width="20" /> -->
+        <!--             <ColumnDefinition Width="*" /> -->
+        <!--             <ColumnDefinition Width="20" /> -->
+        <!--             <ColumnDefinition Width="*" /> -->
+        <!--         </Grid.ColumnDefinitions> -->
+        <!--         <Button Grid.Column="0" Click="ButtonGamePvP_OnClick" FontSize="15" -->
+        <!--                 Content="PvP" ToolTip="Play against another player" /> -->
+        <!--         <Button Grid.Column="2" Click="ButtonGamePvE_OnClick" FontSize="15" -->
+        <!--                 Content="PvE" ToolTip="Play against computer (you go first)" /> -->
+        <!--         <Button Grid.Column="4" Click="ButtonGameEvP_OnClick" FontSize="15" -->
+        <!--                 Content="EvP" ToolTip="Play against computer (computer goes first)" /> -->
+        <!--         <Button Grid.Column="6" Click="ButtonGameEvE_OnClick" FontSize="15" -->
+        <!--                 Content="EvE" ToolTip="Computer plays against Computer" /> -->
+        <!--     </Grid> -->
+        <!-- </Grid> -->
+
+        <!-- <Grid Grid.Row="6" Grid.Column="3" > -->
+        <!--     <Grid.RowDefinitions> -->
+        <!--         <RowDefinition Height="30" /> -->
+        <!--         <RowDefinition Height="30" /> -->
+        <!--     </Grid.RowDefinitions> -->
+        <!--     <TextBlock Grid.Row="0" Grid.ColumnSpan="3" FontSize="15" -->
+        <!--                TextAlignment="Center" FontStyle="Normal" Foreground="Teal" TextWrapping="Wrap" -->
+        <!--                FontWeight="Bold" Text="Program Controls" /> -->
+        <!--     <Grid Grid.Row="1"> -->
+        <!--         <Grid.ColumnDefinitions> -->
+        <!--             <ColumnDefinition Width="*" /> -->
+        <!--             <ColumnDefinition Width="20" /> -->
+        <!--             <ColumnDefinition Width="*" /> -->
+        <!--             <ColumnDefinition Width="20" /> -->
+        <!--             <ColumnDefinition Width="*" /> -->
+        <!--             <ColumnDefinition Width="20" /> -->
+        <!--             <ColumnDefinition Width="*" /> -->
+        <!--         </Grid.ColumnDefinitions> -->
+        <!--         <Button Grid.Column="0" FontSize="15" Click="ButtonSaveAndMenuSave_OnClick" Content="Save" -->
+        <!--                 ToolTip="Save completed match to current folder (*.mhf)" /> -->
+        <!--         <Button Grid.Column="2" FontSize="15" Click="ButtonSelectFolderAndMenuSelectFolder_OnClick" -->
+        <!--                 Content="Folder" ToolTip="Select a folder to save match data (*.mhf)" /> -->
+        <!--         <Button Grid.Column="4" FontSize="15" Click="ButtonAboutAndMenuAbout_OnClick" Content="About" -->
+        <!--                 ToolTip="Show about info" /> -->
+        <!--         <Button Grid.Column="6" FontSize="15" Click="ButtonExitAndMenuExit_OnClick" Content="Exit" -->
+        <!--                 ToolTip="Close the program" /> -->
+        <!--     </Grid> -->
+        <!-- </Grid> -->
+    </Grid>
+</Window>

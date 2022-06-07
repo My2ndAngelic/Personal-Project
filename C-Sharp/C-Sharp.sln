@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp_DNF", "CSharp_DNF\CS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp_DNC", "CSharp_DNC\CSharp_DNC.csproj", "{5613F6A0-20DB-43EE-8404-08AD0C509B52}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToeAva_DNC", "TicTacToeAva_DNC\TicTacToeAva_DNC.csproj", "{70139401-2C70-4A5B-955B-B86D8E22F44F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToeBackendLibrary", "TicTacToeBackendLibrary\TicTacToeBackendLibrary.csproj", "{F15542D6-099B-46B1-BCAC-0283EDBB0BC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|anycpu = Debug|anycpu
@@ -27,6 +31,14 @@ Global
 		{5613F6A0-20DB-43EE-8404-08AD0C509B52}.Debug|anycpu.Build.0 = Debug|Any CPU
 		{5613F6A0-20DB-43EE-8404-08AD0C509B52}.Release|anycpu.ActiveCfg = Release|Any CPU
 		{5613F6A0-20DB-43EE-8404-08AD0C509B52}.Release|anycpu.Build.0 = Release|Any CPU
+		{70139401-2C70-4A5B-955B-B86D8E22F44F}.Debug|anycpu.ActiveCfg = Debug|Any CPU
+		{70139401-2C70-4A5B-955B-B86D8E22F44F}.Debug|anycpu.Build.0 = Debug|Any CPU
+		{70139401-2C70-4A5B-955B-B86D8E22F44F}.Release|anycpu.ActiveCfg = Release|Any CPU
+		{70139401-2C70-4A5B-955B-B86D8E22F44F}.Release|anycpu.Build.0 = Release|Any CPU
+		{F15542D6-099B-46B1-BCAC-0283EDBB0BC0}.Debug|anycpu.ActiveCfg = Debug|Any CPU
+		{F15542D6-099B-46B1-BCAC-0283EDBB0BC0}.Debug|anycpu.Build.0 = Debug|Any CPU
+		{F15542D6-099B-46B1-BCAC-0283EDBB0BC0}.Release|anycpu.ActiveCfg = Release|Any CPU
+		{F15542D6-099B-46B1-BCAC-0283EDBB0BC0}.Release|anycpu.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
