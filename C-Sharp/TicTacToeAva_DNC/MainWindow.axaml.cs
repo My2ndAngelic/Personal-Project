@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Avalonia;
@@ -25,6 +28,7 @@ namespace TicTacToeAva_DNC
         private bool isComputerVsComputerMode;
         private bool isComputerVsHumanMode;
         private bool p1Turn = true;
+        private ObservableCollection<string> leList = new MainWindowData().TListMoveHistory;
 
         public MainWindow()
         {
@@ -32,7 +36,8 @@ namespace TicTacToeAva_DNC
             NewGame();
             InitializeGUI();
             InitializeBoard();
-            DataContext = ttt;
+            DataContext = new MainWindowData();
+            ListMoveHistory.Items = leList;
         }
 
         /// <summary>
@@ -50,7 +55,10 @@ namespace TicTacToeAva_DNC
             // Add move to the database
             if (!ttt.Move(row, column)) // Move method returns false if the move is invalid
                 return;
-
+            
+            // Add move history to the list
+            leList.Add($"{(p1Turn ? ttt.P1Name : ttt.P2Name)} puts {(p1Turn ? ttt.P1Symbol : ttt.P2Symbol)} into row {row} column {column}.");
+            
             // Color the button
             if (p1Turn)
             {
@@ -67,9 +75,7 @@ namespace TicTacToeAva_DNC
 
             // Disable the button
             button.IsEnabled = false;
-
-            // Add move history to the list
-            // ListMoveHistory.Items.Add($"{(p1Turn ? ttt.P1Name : ttt.P2Name)} puts {(p1Turn ? ttt.P1Symbol : ttt.P2Symbol)} into row {row} column {column}.");
+            
             // ListMoveHistory.DataContext.
             CheckGameStatus(); // Check the game status
 
@@ -305,7 +311,7 @@ Match length: {(ttt.TurnHistory.Count == 0 ? 0 : ttt.IsGameOver() ? ttt.EndTime.
             try
             {
                 if (ttt.IsGameOver()) // Game finished
-                {
+                { 
                     File.WriteAllText(
                         $"{folderPath}/{new DateTimeOffset(ttt.StartTime).ToUnixTimeMilliseconds()}.mhf",
                         ttt.ToString()); // Write to file
@@ -388,7 +394,7 @@ Match length: {(ttt.TurnHistory.Count == 0 ? 0 : ttt.IsGameOver() ? ttt.EndTime.
         {
             ttt.Reset();
             p1Turn = true;
-            // ListMoveHistory.Items.Clear();
+            leList.Clear();
         } 
     }
 }

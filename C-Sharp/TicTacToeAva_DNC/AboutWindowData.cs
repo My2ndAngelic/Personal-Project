@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 
 namespace TicTacToeAva_DNC
 {
-    public sealed class AboutWindowData : INotifyPropertyChanged
+    public class AboutWindowData : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 

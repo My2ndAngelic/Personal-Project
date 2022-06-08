@@ -6,7 +6,8 @@
         Width="750" Height="700"
         x:Class="TicTacToeAva_DNC.MainWindow"
         Title="TicTacToeAva_DNC"
-        Icon="Resources/sample.ico">
+        Icon="Resources/sample.ico"
+        DataContext="MainWindowData">
     
     <Grid ColumnDefinitions="20,*,20,*,20" RowDefinitions="20,20,*,20,*,20">
 
@@ -89,7 +90,7 @@ or archive link: https://web.archive.org/web/20220527214727/https://www.tenforum
             <TextBlock FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Top"
                        TextAlignment="Left" FontStyle="Normal" Foreground="Teal" TextWrapping="Wrap" FontWeight="Bold"
                        Text="Move History" />
-            <ListBox Name="ListMoveHistory" Grid.Row="1" FontSize="15" Margin="10,10,10,10">
+            <ListBox Name="ListMoveHistory" Grid.Row="1" FontSize="15" Margin="10,10,10,10" Items="{Binding leList}">
                 <!-- https://stackoverflow.com/questions/1722456/make-listbox-items-in-wpf-not-selectable  -->
                 <!-- <ListBox.ItemContainerStyle> -->
                 <!--     <Style TargetType="{x:Type ListBoxItem}"> -->
