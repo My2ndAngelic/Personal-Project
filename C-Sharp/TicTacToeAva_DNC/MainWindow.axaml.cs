@@ -370,8 +370,10 @@ Match length: {(ttt.TurnHistory.Count == 0 ? 0 : ttt.IsGameOver() ? ttt.EndTime.
         }
 
         /// <summary>
-        ///     Select folder to save match history
+        /// Select folder to save match history
         /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="routedEventArgs"></param>
         private async void MenuSelectFolder_OnClick(object sender, RoutedEventArgs routedEventArgs)
         {
             folderPath = await new OpenFolderDialog().ShowAsync(this) ?? folderPath;
