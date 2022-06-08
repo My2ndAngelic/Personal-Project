@@ -211,9 +211,9 @@ Match length: {(ttt.TurnHistory.Count == 0 ? 0 : ttt.IsGameOver() ? ttt.EndTime.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MenuAbout_OnClick(object sender, RoutedEventArgs e)
-        {
-            new AboutWindow().ShowDialog(this);
+        private async void MenuAbout_OnClick(object sender, RoutedEventArgs e)
+        { 
+            await new AboutWindow().ShowDialog(this);
         }
 
         /// <summary>
