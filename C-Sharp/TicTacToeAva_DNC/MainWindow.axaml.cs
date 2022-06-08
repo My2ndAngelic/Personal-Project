@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Media;
@@ -395,6 +396,11 @@ Match length: {(ttt.TurnHistory.Count == 0 ? 0 : ttt.IsGameOver() ? ttt.EndTime.
             ttt.Reset();
             p1Turn = true;
             leList.Clear();
-        } 
+        }
+
+        private void ListMoveHistory_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+        {
+            // ListMoveHistory.UnselectAll();
+        }
     }
 }
