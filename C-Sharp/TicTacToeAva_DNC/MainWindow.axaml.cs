@@ -372,11 +372,9 @@ Match length: {(ttt.TurnHistory.Count == 0 ? 0 : ttt.IsGameOver() ? ttt.EndTime.
         /// <summary>
         ///     Select folder to save match history
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MenuSelectFolder_OnClick(object sender, RoutedEventArgs e)
+        private async void MenuSelectFolder_OnClick(object sender, RoutedEventArgs routedEventArgs)
         {
-            folderPath = new OpenFolderDialog().ShowAsync(this).Result ?? folderPath;
+            folderPath = await new OpenFolderDialog().ShowAsync(this) ?? folderPath;
             // Do I need to check for write permission before changing the folder?
             SysInfo.Text = $"Save folder: {folderPath}";
         }

@@ -7,7 +7,7 @@
         <TrimMode>copyused</TrimMode>
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
         <ApplicationIcon>Resources\sample.ico</ApplicationIcon>
-        <LangVersion>10</LangVersion>
+        <LangVersion>default</LangVersion>
     </PropertyGroup>
     <ItemGroup>
         <None Remove=".gitignore" />
