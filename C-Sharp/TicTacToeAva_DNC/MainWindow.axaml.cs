@@ -307,7 +307,7 @@ Match length: {(ttt.TurnHistory.Count == 0 ? 0 : ttt.IsGameOver() ? ttt.EndTime.
                 if (ttt.IsGameOver()) // Game finished
                 {
                     File.WriteAllText(
-                        $"{folderPath}\\{new DateTimeOffset(ttt.StartTime).ToUnixTimeMilliseconds()}.mhf",
+                        $"{folderPath}/{new DateTimeOffset(ttt.StartTime).ToUnixTimeMilliseconds()}.mhf",
                         ttt.ToString()); // Write to file
                     MessageBoxManager.GetMessageBoxStandardWindow(new MessageBoxStandardParams()
                     {
