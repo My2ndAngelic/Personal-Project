@@ -4,6 +4,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import lombok.SneakyThrows;
 
 public class MainWindowController {
 
@@ -13,9 +15,10 @@ public class MainWindowController {
         btn.setDisable(true);
     }
 
+    @SneakyThrows
     @FXML
-    protected void onMenuNewClick() {
-
+    protected void onMenuAboutAction() {
+        new AboutWindowApplication().start(new Stage());
     }
 
     @FXML
