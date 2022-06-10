@@ -28,21 +28,21 @@ namespace CSharp_DNC.MathUtils
             return Ans;
         }
 
-        public double Subtract()
-        {
-            Ans = Number1 - Number2;
-            return Ans;
-        }
-
-        public double Multiplication()
-        {
-            Ans = Number1 * Number2;
-            return Ans;
-        }
-
         public double Division()
         {
             Ans = Number1 / Number2;
+            return Ans;
+        }
+
+        public void Enter(double Number1, double Number2)
+        {
+            this.Number1 = Number1;
+            this.Number2 = Number2;
+        }
+
+        public double Exponential()
+        {
+            Ans = Math.Pow(Number1, Number2);
             return Ans;
         }
 
@@ -60,21 +60,15 @@ namespace CSharp_DNC.MathUtils
             return Ans;
         }
 
-        public double Exponential()
-        {
-            Ans = Math.Pow(Number1, Number2);
-            return Ans;
-        }
-
         public double GetAns()
         {
             return Ans;
         }
 
-        public void Enter(double Number1, double Number2)
+        public double Multiplication()
         {
-            this.Number1 = Number1;
-            this.Number2 = Number2;
+            Ans = Number1 * Number2;
+            return Ans;
         }
 
         public void Reset()
@@ -82,6 +76,12 @@ namespace CSharp_DNC.MathUtils
             Number1 = 0;
             Number2 = 0;
             Ans = 0;
+        }
+
+        public double Subtract()
+        {
+            Ans = Number1 - Number2;
+            return Ans;
         }
     }
 }

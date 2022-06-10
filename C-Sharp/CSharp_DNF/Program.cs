@@ -35,7 +35,7 @@ namespace CSharp_DNF
             Console.WriteLine(d);
             Console.ReadLine();
             var e = 420.690;
-            Console.WriteLine(String.Format("",e));
+            Console.WriteLine("", e);
         }
     }
 }

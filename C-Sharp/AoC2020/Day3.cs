@@ -1,8 +1,5 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
-using System.Management.Instrumentation;
-using System.Reflection;
 
 namespace AoC2020
 {
@@ -10,25 +7,23 @@ namespace AoC2020
     {
         public static void D3()
         {
-            var a = AoC2020.Utilities.FileReaderFromDayNo(3);
+            var a = Utilities.FileReaderFromDayNo(3);
 
             int TreeCounter(string[] array, int right, int down)
             {
                 var tree = 0;
                 for (var i = 0; i < a.Length; i += down)
-                {
                     if (a[i][right * i % a[i].Length].Equals('#'))
-                    {
                         tree++;
-                    }
-                }
                 return tree;
             }
 
             Console.WriteLine(TreeCounter(a, 3, 1));
 
 
-            var tempout2 = new[] {TreeCounter(a, 1, 1),
+            var tempout2 = new[]
+            {
+                TreeCounter(a, 1, 1),
                 TreeCounter(a, 3, 1),
                 TreeCounter(a, 5, 1),
                 TreeCounter(a, 7, 1),

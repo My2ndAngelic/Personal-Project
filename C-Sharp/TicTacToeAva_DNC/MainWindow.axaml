@@ -8,7 +8,7 @@
         Title="TicTacToeAva_DNC"
         Icon="Resources/sample.ico"
         DataContext="MainWindowData">
-    
+
     <Grid ColumnDefinitions="20,*,20,*,20" RowDefinitions="20,20,*,20,*,20">
 
         <!-- If the menu is weird looking, please take a look at 
@@ -47,41 +47,41 @@ or archive link: https://web.archive.org/web/20220527214727/https://www.tenforum
             <TextBlock Text="Play Area" TextAlignment="Center" FontSize="15" Foreground="Chocolate" FontWeight="Bold" />
             <!-- <Button Content="" Foreground="Aqua" Background="Aqua"/> -->
             <Grid Name="FieldOfPlay" Grid.Row="1" Grid.Column="0" ColumnDefinitions="*,*,*" RowDefinitions="*,*,*">
-                <Button Grid.Row="0" Grid.Column="0" 
+                <Button Grid.Row="0" Grid.Column="0"
                         HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch" 
+                        VerticalAlignment="Stretch"
                         Margin="10" />
-                <Button Grid.Row="0 " Grid.Column="1" 
+                <Button Grid.Row="0 " Grid.Column="1"
                         HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch" 
+                        VerticalAlignment="Stretch"
                         Margin="10" />
-                <Button Grid.Row="0 " Grid.Column="2" 
+                <Button Grid.Row="0 " Grid.Column="2"
                         HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch" 
+                        VerticalAlignment="Stretch"
                         Margin="10" />
-                <Button Grid.Row="1 " Grid.Column="0" 
+                <Button Grid.Row="1 " Grid.Column="0"
                         HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch" 
+                        VerticalAlignment="Stretch"
                         Margin="10" />
-                <Button Grid.Row="1 " Grid.Column="1" 
+                <Button Grid.Row="1 " Grid.Column="1"
                         HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch" 
+                        VerticalAlignment="Stretch"
                         Margin="10" />
-                <Button Grid.Row="1 " Grid.Column="2" 
+                <Button Grid.Row="1 " Grid.Column="2"
                         HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch" 
+                        VerticalAlignment="Stretch"
                         Margin="10" />
-                <Button Grid.Row="2 " Grid.Column="0" 
+                <Button Grid.Row="2 " Grid.Column="0"
                         HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch" 
+                        VerticalAlignment="Stretch"
                         Margin="10" />
-                <Button Grid.Row="2 " Grid.Column="1" 
+                <Button Grid.Row="2 " Grid.Column="1"
                         HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch" 
+                        VerticalAlignment="Stretch"
                         Margin="10" />
-                <Button Grid.Row="2 " Grid.Column="2" 
+                <Button Grid.Row="2 " Grid.Column="2"
                         HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch" 
+                        VerticalAlignment="Stretch"
                         Margin="10" />
             </Grid>
         </Grid>
@@ -90,7 +90,8 @@ or archive link: https://web.archive.org/web/20220527214727/https://www.tenforum
             <TextBlock FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Top"
                        TextAlignment="Left" FontStyle="Normal" Foreground="Teal" TextWrapping="Wrap" FontWeight="Bold"
                        Text="Move History" />
-            <ListBox Name="ListMoveHistory" Grid.Row="1" Margin="10,10,10,10" Items="{Binding TListMoveHistory}" SelectionChanged="ListMoveHistory_OnSelectionChanged" />
+            <ListBox Name="ListMoveHistory" Grid.Row="1" Margin="10,10,10,10" Items="{Binding TListMoveHistory}"
+                     SelectionChanged="ListMoveHistory_OnSelectionChanged" />
         </Grid>
 
         <!-- <Grid Grid.Row="4" Grid.Column="1"> -->

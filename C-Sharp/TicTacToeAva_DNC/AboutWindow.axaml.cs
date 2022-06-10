@@ -16,14 +16,14 @@ namespace TicTacToeAva_DNC
             DataContext = new AboutWindowData();
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
-
         private void ButtonOK_OnClick(object? sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void InitializeComponent()
+        {
+            AvaloniaXamlLoader.Load(this);
         }
     }
 }

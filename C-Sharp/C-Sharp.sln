@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToeAva_DNC", "TicTacT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToeBackendLibrary", "TicTacToeBackendLibrary\TicTacToeBackendLibrary.csproj", "{F15542D6-099B-46B1-BCAC-0283EDBB0BC0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground", "Playground\Playground.csproj", "{FB0505FC-A933-4323-BFBB-AA4E079D0F57}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|anycpu = Debug|anycpu
@@ -39,6 +41,10 @@ Global
 		{F15542D6-099B-46B1-BCAC-0283EDBB0BC0}.Debug|anycpu.Build.0 = Debug|Any CPU
 		{F15542D6-099B-46B1-BCAC-0283EDBB0BC0}.Release|anycpu.ActiveCfg = Release|Any CPU
 		{F15542D6-099B-46B1-BCAC-0283EDBB0BC0}.Release|anycpu.Build.0 = Release|Any CPU
+		{FB0505FC-A933-4323-BFBB-AA4E079D0F57}.Debug|anycpu.ActiveCfg = Debug|Any CPU
+		{FB0505FC-A933-4323-BFBB-AA4E079D0F57}.Debug|anycpu.Build.0 = Debug|Any CPU
+		{FB0505FC-A933-4323-BFBB-AA4E079D0F57}.Release|anycpu.ActiveCfg = Release|Any CPU
+		{FB0505FC-A933-4323-BFBB-AA4E079D0F57}.Release|anycpu.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

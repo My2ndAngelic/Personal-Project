@@ -11,14 +11,14 @@ namespace CSharp_DNF
             Name = name;
         }
 
-        public string GetName()
-        {
-            return Name;
-        }
-
         public int GetAge()
         {
             return Age;
+        }
+
+        public string GetName()
+        {
+            return Name;
         }
     }
 

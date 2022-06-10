@@ -1,22 +1,18 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Reactive.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Threading;
-using TicTacToeBackendLibrary;
 using MessageBox.Avalonia;
 using MessageBox.Avalonia.DTO;
 using MessageBox.Avalonia.Enums;
+using TicTacToeBackendLibrary;
 
 namespace TicTacToeAva_DNC
 {
@@ -28,8 +24,8 @@ namespace TicTacToeAva_DNC
         private bool isComputerTurn;
         private bool isComputerVsComputerMode;
         private bool isComputerVsHumanMode;
+        private readonly ObservableCollection<string> leList = new MainWindowData().TListMoveHistory;
         private bool p1Turn = true;
-        private ObservableCollection<string> leList = new MainWindowData().TListMoveHistory;
 
         public MainWindow()
         {
@@ -56,10 +52,11 @@ namespace TicTacToeAva_DNC
             // Add move to the database
             if (!ttt.Move(row, column)) // Move method returns false if the move is invalid
                 return;
-            
+
             // Add move history to the list
-            leList.Add($"{(p1Turn ? ttt.P1Name : ttt.P2Name)} puts {(p1Turn ? ttt.P1Symbol : ttt.P2Symbol)} into row {row} column {column}.");
-            
+            leList.Add(
+                $"{(p1Turn ? ttt.P1Name : ttt.P2Name)} puts {(p1Turn ? ttt.P1Symbol : ttt.P2Symbol)} into row {row} column {column}.");
+
             // Color the button
             if (p1Turn)
             {
@@ -76,7 +73,7 @@ namespace TicTacToeAva_DNC
 
             // Disable the button
             button.IsEnabled = false;
-            
+
             // ListMoveHistory.DataContext.
             CheckGameStatus(); // Check the game status
 
@@ -136,8 +133,7 @@ namespace TicTacToeAva_DNC
         /// <param name="e"></param>
         private void dispatcherTimer_Tick(object? sender, EventArgs e)
         {
-            TimeInfo.Text =
-                $@"Date: {DateTime.Now:yyyy-MM-dd}
+            TimeInfo.Text = $@"Date: {DateTime.Now:yyyy-MM-dd}
 Local time: {DateTime.Now:HH:mm:ss}
 Match length: {(ttt.TurnHistory.Count == 0 ? 0 : ttt.IsGameOver() ? ttt.EndTime.Subtract(ttt.StartTime).TotalMilliseconds / 1000 : DateTime.Now.Subtract(ttt.StartTime).TotalMilliseconds / 1000):F}";
         }
@@ -185,7 +181,7 @@ Match length: {(ttt.TurnHistory.Count == 0 ? 0 : ttt.IsGameOver() ? ttt.EndTime.
                     VerticalAlignment = VerticalAlignment.Stretch,
                     Margin = Thickness.Parse("10,10,10,10"),
                     HorizontalContentAlignment = HorizontalAlignment.Center,
-                    VerticalContentAlignment = VerticalAlignment.Center,
+                    VerticalContentAlignment = VerticalAlignment.Center
                 };
                 button.Click += ButtonGameBoard_OnClick;
                 Grid.SetRow(button, i);
@@ -213,13 +209,18 @@ Match length: {(ttt.TurnHistory.Count == 0 ? 0 : ttt.IsGameOver() ? ttt.EndTime.
                 $"{((AssemblyProductAttribute) Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyProductAttribute), false)).Product}";
         }
 
+        private void ListMoveHistory_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
+        {
+            // ListMoveHistory.UnselectAll();
+        }
+
         /// <summary>
         ///     Show about dialog
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private async void MenuAbout_OnClick(object sender, RoutedEventArgs e)
-        { 
+        {
             await new AboutWindow().ShowDialog(this);
         }
 
@@ -312,72 +313,80 @@ Match length: {(ttt.TurnHistory.Count == 0 ? 0 : ttt.IsGameOver() ? ttt.EndTime.
             try
             {
                 if (ttt.IsGameOver()) // Game finished
-                { 
+                {
                     File.WriteAllText(
                         $"{folderPath}/{new DateTimeOffset(ttt.StartTime).ToUnixTimeMilliseconds()}.mhf",
                         ttt.ToString()); // Write to file
-                    MessageBoxManager.GetMessageBoxStandardWindow(new MessageBoxStandardParams()
+                    MessageBoxManager.GetMessageBoxStandardWindow(new MessageBoxStandardParams
                     {
                         ButtonDefinitions = ButtonEnum.Ok,
                         ContentTitle = "Save",
-                        ContentMessage = $"Game saved successfully.",
+                        ContentMessage = "Game saved successfully.",
                         WindowIcon = Icon,
-                        Icon = MessageBox.Avalonia.Enums.Icon.Info,
+                        Icon = MessageBox.Avalonia.Enums.Icon.Info
                     }).Show();
                 }
                 else // Game not finished
                 {
-                    MessageBoxManager.GetMessageBoxStandardWindow(new MessageBoxStandardParams()
+                    MessageBoxManager.GetMessageBoxStandardWindow(new MessageBoxStandardParams
                     {
                         ButtonDefinitions = ButtonEnum.Ok,
                         ContentTitle = "Error",
                         ContentMessage = "Please finish the game before saving",
                         WindowIcon = Icon,
-                        Icon = MessageBox.Avalonia.Enums.Icon.Error,
+                        Icon = MessageBox.Avalonia.Enums.Icon.Error
                     }).Show();
                 }
             }
             catch (DirectoryNotFoundException) // If saving on a network/flash drive and the connection lost
             {
-                MessageBoxManager.GetMessageBoxStandardWindow(new MessageBoxStandardParams()
+                MessageBoxManager.GetMessageBoxStandardWindow(new MessageBoxStandardParams
                 {
                     ButtonDefinitions = ButtonEnum.Ok,
                     ContentTitle = "Error",
                     ContentMessage = $"{folderPath} is not found. Please select another folder and try again.",
                     WindowIcon = Icon,
-                    Icon = MessageBox.Avalonia.Enums.Icon.Error,
+                    Icon = MessageBox.Avalonia.Enums.Icon.Error
                 }).Show();
             }
             catch (IOException ex) // If error occured during saving
             {
-                MessageBoxManager.GetMessageBoxStandardWindow(new MessageBoxStandardParams()
+                MessageBoxManager.GetMessageBoxStandardWindow(new MessageBoxStandardParams
                 {
                     ButtonDefinitions = ButtonEnum.Ok,
                     ContentTitle = "Error",
                     ContentMessage = $"{ex.Message}",
                     WindowIcon = Icon,
-                    Icon = MessageBox.Avalonia.Enums.Icon.Error,
+                    Icon = MessageBox.Avalonia.Enums.Icon.Error
                 }).Show();
             }
             catch (UnauthorizedAccessException) // If you cannot write match history due to lack of permission
             {
-                MessageBoxManager.GetMessageBoxStandardWindow(new MessageBoxStandardParams()
+                MessageBoxManager.GetMessageBoxStandardWindow(new MessageBoxStandardParams
                 {
                     ButtonDefinitions = ButtonEnum.Ok,
                     ContentTitle = "Error",
-                    ContentMessage = $"{folderPath} is not accessible. Please make sure you have permission to write to this folder.",
+                    ContentMessage =
+                        $"{folderPath} is not accessible. Please make sure you have permission to write to this folder.",
                     WindowIcon = Icon,
-                    Icon = MessageBox.Avalonia.Enums.Icon.Error,
+                    Icon = MessageBox.Avalonia.Enums.Icon.Error
                 }).Show();
             }
-            // catch (Exception ex) // Other error, just catch it, I do not know what else can happen
-            // {
-            //     MessageBox.Show($@"{ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            // }
+            catch (Exception ex) // If you cannot write match history due to lack of permission
+            {
+                MessageBoxManager.GetMessageBoxStandardWindow(new MessageBoxStandardParams
+                {
+                    ButtonDefinitions = ButtonEnum.Ok,
+                    ContentTitle = "Error",
+                    ContentMessage = $"{ex.Message}",
+                    WindowIcon = Icon,
+                    Icon = MessageBox.Avalonia.Enums.Icon.Error
+                }).Show();
+            }
         }
 
         /// <summary>
-        /// Select folder to save match history
+        ///     Select folder to save match history
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="routedEventArgs"></param>
@@ -396,11 +405,6 @@ Match length: {(ttt.TurnHistory.Count == 0 ? 0 : ttt.IsGameOver() ? ttt.EndTime.
             ttt.Reset();
             p1Turn = true;
             leList.Clear();
-        }
-
-        private void ListMoveHistory_OnSelectionChanged(object? sender, SelectionChangedEventArgs e)
-        {
-            // ListMoveHistory.UnselectAll();
         }
     }
 }

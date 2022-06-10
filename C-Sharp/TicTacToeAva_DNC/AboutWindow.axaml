@@ -2,26 +2,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TicTacToeAva_DNC"
-        mc:Ignorable="d" 
+        mc:Ignorable="d"
         Width="600" Height="500"
         x:Class="TicTacToeAva_DNC.AboutWindow"
-        Title="AboutWindow"
+        Title="About"
         Icon="Resources/sample.ico"
         DataContext="AboutWindowData">
     <Grid ColumnDefinitions="20,*,20" RowDefinitions="20,50,20,*,0,30,20">
         <Grid Grid.Row="1" Grid.Column="1" ColumnDefinitions="80,*">
-            <Image Grid.Column="0" Source="Resources/sample.png"/>
-                <!--This will cause the program to crash if done improperly-->
-                <TextBlock Name="TextTitle" Grid.Column="1" Text="{Binding TTitle}" TextAlignment="Left"
-                           VerticalAlignment="Center" FontSize="30" FontWeight="Bold" />
-            </Grid>
-            <Grid Grid.Row="3" Grid.Column="1" ColumnDefinitions="80,*" RowDefinitions="*">
-                <TextBlock Name="TextAbout" Grid.Column="1" Text="{Binding  TAbout}" TextAlignment="Left"
-                           FontSize="15" TextWrapping="Wrap" />
-            </Grid>
-            <Grid Grid.Row="5" Grid.Column="1" ColumnDefinitions="*,100">
-                <Button Grid.Column="1" Content="OK" FontSize="15" Click="ButtonOK_OnClick" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-            </Grid>
+            <Image Grid.Column="0" Source="Resources/sample.png" />
+            <!--This will cause the program to crash if done improperly-->
+            <TextBlock Name="TextTitle" Grid.Column="1" Text="{Binding TTitle}" TextAlignment="Left"
+                       VerticalAlignment="Center" FontSize="30" FontWeight="Bold" />
         </Grid>
+        <Grid Grid.Row="3" Grid.Column="1" ColumnDefinitions="80,*" RowDefinitions="*">
+            <TextBlock Name="TextAbout" Grid.Column="1" Text="{Binding  TAbout}" TextAlignment="Left"
+                       FontSize="15" TextWrapping="Wrap" />
+        </Grid>
+        <Grid Grid.Row="5" Grid.Column="1" ColumnDefinitions="*,100">
+            <Button Grid.Column="1" Content="OK" FontSize="15" Click="ButtonOK_OnClick" HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        </Grid>
+    </Grid>
 </Window>
