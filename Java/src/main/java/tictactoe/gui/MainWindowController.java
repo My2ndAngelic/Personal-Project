@@ -5,7 +5,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -53,11 +55,23 @@ public class MainWindowController {
 
     @FXML
     protected void onMenuExitClick() {
+        new Alert(Alert.AlertType.ERROR) {{
+            setTitle("Exit");
+            setTitle("Message Here...");
+            setHeaderText("Look, an Information Dialog");
+            setContentText("I have a great message for you!");
+            showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    System.out.println("Pressed OK.");
+                }
+            });
+        }};
+
         Platform.exit();
         System.exit(0);
     }
 
-    public void menuItemSelectFolderOnAction(ActionEvent ae) {
+    public void onMenuSelectFolderAction(ActionEvent ae) {
 //        MenuItem menuItem = (MenuItem) ae.getTarget();
 //        ContextMenu menuBar = menuItem.getParentPopup();
 //        Scene scene = menuBar.getScene();
@@ -66,9 +80,7 @@ public class MainWindowController {
             folderPath = new DirectoryChooser().showDialog(((MenuItem) ae.getTarget()).getParentPopup().getScene().getWindow()).getAbsolutePath();
             System.out.println(folderPath);
         } catch (Exception e) {
-            System.out.println(folderPath);
-        } finally {
-
+            e.printStackTrace();
         }
     }
 }

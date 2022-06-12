@@ -49,7 +49,7 @@
             </Menu>
             <SeparatorMenuItem mnemonicParsing="false"/>
             <MenuItem mnemonicParsing="false" text="Save"/>
-            <MenuItem fx:id="menuItemSelectFolder" mnemonicParsing="false" text="Select Folder" onAction="#menuItemSelectFolderOnAction"/>
+            <MenuItem fx:id="menuItemSelectFolder" mnemonicParsing="false" text="Select Folder" onAction="#onMenuSelectFolderAction"/>
             <SeparatorMenuItem mnemonicParsing="false"/>
             <MenuItem mnemonicParsing="false" onAction="#onMenuExitClick" text="Quit"/>
         </Menu>
