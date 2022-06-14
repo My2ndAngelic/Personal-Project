@@ -2,8 +2,7 @@ package tictactoe.gui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -16,13 +15,13 @@ public class AboutWindowController {
     }
 
     @FXML
-    private TextArea taAbout;
+    private Label tfTitle;
     @FXML
-    private TextField tfTitle;
+    private Label taAbout;
 
     @FXML
     public void initialize() {
-        taAbout.setText(new AboutWindowData().gettAbout());
         tfTitle.setText(new AboutWindowData().getTTitle());
+        taAbout.setText(new AboutWindowData().gettAbout());
     }
 }

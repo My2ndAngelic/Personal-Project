@@ -10,14 +10,15 @@ import java.util.List;
 import java.util.Random;
 
 public @Data class TicTacToe {
+    private String winner;
     private final List<String> turnHistory;
     private final List<String[][]> boardHistory;
-    private final int boardSize;
-    private final String p1Symbol;
-    private final String p1Name;
+    private int boardSize;
+    private String p1Symbol;
+    private String p1Name;
 
-    private final String p2Name;
-    private final String p2Symbol;
+    private String p2Name;
+    private String p2Symbol;
     private String[][] board;
     private int currentPlayer;
     private Instant endTime;
@@ -186,7 +187,7 @@ public @Data class TicTacToe {
     /// <param name="column">Column of move</param>
     /// <returns>True if valid</returns>
     public boolean IsValidMove(int row, int column) {
-        return StringUtils.isNotBlank(board[row][column]);
+        return StringUtils.isBlank(board[row][column]);
     }
 
     /**
@@ -271,11 +272,11 @@ public @Data class TicTacToe {
     /// </summary>
     /// <returns>True if game over</returns>
     public boolean IsGameOver() {
-        return !Strings.isNullOrEmpty(GetWinner());
+        return !Strings.isNullOrEmpty(getWinner());
     }
 
-    public String GetWinner() {
-        String winner = "";
+    public String getWinner() {
+        this.winner = "";
         if (IsWinner(p1Symbol))
             winner = p1Name;
         else if (IsWinner(p2Symbol))
@@ -295,6 +296,7 @@ public @Data class TicTacToe {
         // Check rows
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
+                if (StringUtils.isBlank(board[i][j])) continue;
                 if (!board[i][j].equals(symbol)) break;
 
                 if (j == boardSize - 1) {
@@ -306,6 +308,7 @@ public @Data class TicTacToe {
         // Check columns
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
+                if (StringUtils.isBlank(board[j][i])) continue;
                 if (!board[j][i].equals(symbol)) break;
 
                 if (j == boardSize - 1) {
@@ -316,6 +319,7 @@ public @Data class TicTacToe {
 
         // Check diagonals left to right
         for (int i = 0; i < boardSize; i++) {
+            if (StringUtils.isBlank(board[i][i])) continue;
             if (!board[i][i].equals(symbol)) break;
 
             if (i == boardSize - 1) {
@@ -325,6 +329,7 @@ public @Data class TicTacToe {
 
         // Check diagonals right to left
         for (int i = 0; i < boardSize; i++) {
+            if (StringUtils.isBlank(board[i][boardSize - 1 - i])) continue;
             if (!board[i][boardSize - 1 - i].equals(symbol)) break;
 
             if (i == boardSize - 1) {

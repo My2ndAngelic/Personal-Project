@@ -77,17 +77,12 @@ namespace TicTacToeAva_DNC
             // ListMoveHistory.DataContext.
             CheckGameStatus(); // Check the game status
 
-            switch (isComputerVsComputerMode) // Check if computer vs computer mode
-            {
-                case false when !isComputerVsHumanMode: // If computer vs computer
-                    return;
-                case false: // If computer vs human
-                    isComputerTurn = !isComputerTurn;
-                    break;
-                default: // If computer vs computer
-                    isComputerTurn = true;
-                    break;
-            }
+            if (!isComputerVsComputerMode && !isComputerVsHumanMode)
+                return;
+            else if (!isComputerVsComputerMode)
+                isComputerTurn = !isComputerTurn;
+            else
+                isComputerTurn = true;
 
             ComputerMove(); // Computer move
         }
@@ -260,7 +255,7 @@ Match length: {(ttt.TurnHistory.Count == 0 ? 0 : ttt.IsGameOver() ? ttt.EndTime.
         private void MenuNewEvP_OnClick(object sender, RoutedEventArgs e)
         {
             NewGame();
-            ttt.P1Name = "Computer";
+            ttt.P1Name = "Computer 1";
             ttt.P2Name = "Player 2";
             isComputerVsHumanMode = true;
             isComputerTurn = true;
@@ -279,12 +274,11 @@ Match length: {(ttt.TurnHistory.Count == 0 ? 0 : ttt.IsGameOver() ? ttt.EndTime.
         {
             NewGame();
             ttt.P1Name = "Player 1";
-            ttt.P2Name = "Computer";
+            ttt.P2Name = "Computer 2";
             isComputerVsHumanMode = true;
             isComputerTurn = false;
             isComputerVsComputerMode = false;
             InitializeBoard();
-            CheckGameStatus();
         }
 
         /// <summary>
