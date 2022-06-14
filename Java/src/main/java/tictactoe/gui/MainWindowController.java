@@ -5,9 +5,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import org.apache.commons.text.StringSubstitutor;
@@ -21,42 +23,40 @@ public class MainWindowController {
 
     private final int BoardSize = 3;
     private final TicTacToe ttt = new TicTacToe(BoardSize);
-    @FXML private ListView<String> listMoveHistory;
-    @FXML private GridPane FieldOfPlay;
-    @FXML private Label TimeInfo;
-    @FXML private Label GameStatus;
-    @FXML private Label SysInfo;
+    private final ObservableList<String> leList = FXCollections.observableArrayList();
+    @FXML
+    private ListView<String> listMoveHistory;
+    @FXML
+    private GridPane FieldOfPlay;
+    @FXML
+    private Label TimeInfo;
+    @FXML
+    private Label GameStatus;
+    @FXML
+    private Label SysInfo;
     private String folderPath = System.getProperty("user.dir");
     private boolean isComputerTurn = false;
     private boolean isComputerVsComputerMode = false;
     private boolean isComputerVsHumanMode = false;
-    private final ObservableList<String> leList = FXCollections.observableArrayList();
     private boolean p1Turn = true;
-    public MainWindowController() {
 
-    }
+//    public MainWindowController() {
+//
+//    }
 
     @FXML
     public void initialize() {
         SysInfo.setText("Save folder: " + folderPath);
         listMoveHistory.setItems(leList);
+        listMoveHistory.setStyle("-fx-font-size: 15px;");
         initializeBoard();
-        listMoveHistory.setCellFactory(cell -> new ListCell<>() {
-            @Override
-            protected void updateItem(String item, boolean empty) {
-                super.updateItem(item, empty);
-                if (item != null) {
-                    setText(item);
-                    setFont(Font.font(15));
-                }
-            }
-        });
+
     }
 
     private void initializeBoard() {
         for (Node node : FieldOfPlay.getChildren()) {
             node.setDisable(false);
-            ((Button)node).setText("");
+            ((Button) node).setText("");
         }
 
         // Match history list
@@ -71,25 +71,22 @@ public class MainWindowController {
         int row = GridPane.getRowIndex(node);
         int column = GridPane.getColumnIndex(node);
 
-        if (!ttt.Move(row, column)) // Move method returns false if the move is invalid
+        if (!ttt.move(row, column)) // Move method returns false if the move is invalid
             return;
 
         // Add move history to the list
         leList.add(StringSubstitutor.replace(String.format("${%s} puts ${%s} into row ${row} column ${column}.", p1Turn ? "ttt.p1Name" : "ttt.p2Name", p1Turn ? "ttt.p1Symbol" : "ttt.p2Symbol"), stringsHashMap(row, column)));
 
         // Color the button
-        if (p1Turn)
-        {
+        if (p1Turn) {
             button.setText(ttt.getP1Symbol());
             button.setStyle("-fx-text-fill: red");
-            p1Turn = false;
-        }
-        else
-        {
+        } else {
             button.setText(ttt.getP2Symbol());
             button.setStyle("-fx-text-fill: blue");
-            p1Turn = true;
         }
+        p1Turn = !p1Turn;
+
 
         // Disable the button
         button.setDisable(true);
@@ -110,22 +107,13 @@ public class MainWindowController {
     }
 
     private void ComputerMove() {
-        if (!isComputerTurn || ttt.IsGameOver()) return; // If computer is not playing or game is over, do nothing
+        if (!isComputerTurn || ttt.isGameOver()) return; // If computer is not playing or game is over, do nothing
 
-        int[] data = ttt.RandomComputerMoveIntegerArray(); // Get computer move
+        int[] data = ttt.randomComputerMoveIntegerArray(); // Get computer move
         int row = data[0];
         int column = data[1];
         System.out.println(Arrays.toString(new int[]{row, column}));
-//        (FieldOfPlay.getChildren().filtered(x -> GridPane.getRowIndex(x) == row && GridPane.getColumnIndex(x) == column).get(0)).fireEvent(new Event(MouseEvent.MOUSE_CLICKED));
-        Button n = new Button();
-
-        for (Node node : FieldOfPlay.getChildren()) {
-            if (GridPane.getColumnIndex(node) == column && GridPane.getRowIndex(node) == row) {
-                n = (Button) node;
-                break;
-            }
-        }
-        n.fire();
+        ((Button) FieldOfPlay.getChildren().filtered(x -> GridPane.getRowIndex(x) == row && GridPane.getColumnIndex(x) == column).get(0)).fire();
     }
 
     private HashMap<String, String> stringsHashMap() {
@@ -140,21 +128,20 @@ public class MainWindowController {
 
     private HashMap<String, String> stringsHashMap(int row, int column) {
         return new HashMap<>() {{
-           putAll(stringsHashMap());
-           put("row", String.valueOf(row));
-           put("column", String.valueOf(column));
+            putAll(stringsHashMap());
+            put("row", String.valueOf(row));
+            put("column", String.valueOf(column));
         }};
     }
 
     private void CheckGameStatus() {
-        if (!ttt.IsGameOver())
-        {
+        if (!ttt.isGameOver()) {
             GameStatus.setText(StringSubstitutor.replace("Ongoing between ${ttt.p1Name}: ${ttt.p1Symbol} and ${ttt.p2Name}: ${ttt.p2Symbol}", stringsHashMap()));
             return;
         }
 
         GameStatus.setText(StringSubstitutor.replace("Game over. ${ttt.winner} wins!", stringsHashMap()));
-        // ListMoveHistory.Items.Add($"Match length: {ttt.EndTime.Subtract(ttt.StartTime).TotalSeconds:F} seconds");
+        leList.add("Match length: " + String.format("%.2f", ttt.getEndTime().toEpochMilli() / 1000.0 - ttt.getStartTime().toEpochMilli() / 1000.0) + " seconds");
 
         for (Node button : FieldOfPlay.getChildren())
             button.setDisable(true);
@@ -176,10 +163,6 @@ public class MainWindowController {
 
     @FXML
     protected void onMenuSelectFolderAction(ActionEvent ae) {
-//        MenuItem menuItem = (MenuItem) ae.getTarget();
-//        ContextMenu menuBar = menuItem.getParentPopup();
-//        Scene scene = menuBar.getScene();
-//        Window window = scene.getWindow();
         folderPath = new DirectoryChooser().showDialog(((MenuItem) ae.getTarget()).getParentPopup().getScene().getWindow()).getAbsolutePath();
         SysInfo.setText("Save folder: " + folderPath);
     }
@@ -196,6 +179,7 @@ public class MainWindowController {
         CheckGameStatus();
         ComputerMove();
     }
+
     @FXML
     protected void onMenuEvPAction() {
         newGame();
@@ -219,6 +203,7 @@ public class MainWindowController {
         isComputerVsComputerMode = false;
         initializeBoard();
     }
+
     @FXML
     protected void onMenuPvPAction() {
         newGame();
@@ -231,7 +216,7 @@ public class MainWindowController {
     }
 
     private void newGame() {
-        ttt.Reset();
+        ttt.reset();
         p1Turn = true;
         leList.clear();
     }

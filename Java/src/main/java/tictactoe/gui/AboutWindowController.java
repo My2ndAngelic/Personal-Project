@@ -10,14 +10,14 @@ public class AboutWindowController {
 
 
     @FXML
-    public void onButtonOKClick(MouseEvent mouseEvent) {
-        ((Stage)(((Button)mouseEvent.getSource()).getScene().getWindow())).close();
-    }
-
-    @FXML
     private Label tfTitle;
     @FXML
     private Label taAbout;
+
+    @FXML
+    public void onButtonOKClick(MouseEvent mouseEvent) {
+        ((Stage) (((Button) mouseEvent.getSource()).getScene().getWindow())).close();
+    }
 
     @FXML
     public void initialize() {

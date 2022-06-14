@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public @Data class TicTacToe {
-    private String winner;
+@Data
+public class TicTacToe {
     private final List<String> turnHistory;
     private final List<String[][]> boardHistory;
     private int boardSize;
@@ -123,20 +123,11 @@ public @Data class TicTacToe {
 
     /// <summary>
     ///     Print jagged array as String with each array on a separate line
-    ///     Called directly on the boardData array
-    /// </summary>
-    /// <returns>BoardData Array</returns>
-    public String BoardDisplay() {
-        return BoardDisplay(board);
-    }
-
-    /// <summary>
-    ///     Print jagged array as String with each array on a separate line
     ///     Basically java.util.Arrays.deepToString but multi-line
     /// </summary>
     /// <param name="boardData">Jagged String array</param>
     /// <returns>String array</returns>
-    public static String BoardDisplay(String[][] boardData) {
+    public static String displayBoard(String[][] boardData) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < boardData.length; i++) {
             for (int j = 0; j < boardData[0].length; j++)
@@ -150,15 +141,12 @@ public @Data class TicTacToe {
     }
 
     /// <summary>
-    ///     Check if move is valid
+    ///     Print jagged array as String with each array on a separate line
+    ///     Called directly on the boardData array
     /// </summary>
-    /// <param name="move">
-    ///     Move description in String
-    ///     Format: Symbol-Row-Column
-    /// </param>
-    /// <returns>True if valid</returns>
-    public boolean IsValidMove(String move) {
-        return IsValidMove(move.split("-"));
+    /// <returns>BoardData Array</returns>
+    public String displayBoard() {
+        return displayBoard(board);
     }
 
     /// <summary>
@@ -169,12 +157,24 @@ public @Data class TicTacToe {
     ///     Format: Symbol-Row-Column
     /// </param>
     /// <returns>True if valid</returns>
-    public boolean IsValidMove(String[] move) {
+    public boolean isValidMove(String move) {
+        return isValidMove(move.split("-"));
+    }
+
+    /// <summary>
+    ///     Check if move is valid
+    /// </summary>
+    /// <param name="move">
+    ///     Move description in String
+    ///     Format: Symbol-Row-Column
+    /// </param>
+    /// <returns>True if valid</returns>
+    public boolean isValidMove(String[] move) {
         try {
             int row = Integer.parseInt(move[1]);
             int column = Integer.parseInt(move[2]);
 
-            return IsValidMove(row, column);
+            return isValidMove(row, column);
         } catch (NumberFormatException ignored) {
             return false;
         }
@@ -186,7 +186,7 @@ public @Data class TicTacToe {
     /// <param name="row">Row of move</param>
     /// <param name="column">Column of move</param>
     /// <returns>True if valid</returns>
-    public boolean IsValidMove(int row, int column) {
+    public boolean isValidMove(int row, int column) {
         return StringUtils.isBlank(board[row][column]);
     }
 
@@ -197,12 +197,12 @@ public @Data class TicTacToe {
      * @param column Column of move
      * @return True if valid move
      */
-    public boolean Move(int row, int column) {
+    public boolean move(int row, int column) {
         String symbol = getSymbol(currentPlayer);
 
-        currentPlayer++; // Next player
+        currentPlayer = (currentPlayer + 1) % 2; // Next player
 
-        return Move(String.join("-", symbol, Integer.toString(row), Integer.toString(column)));
+        return move(String.join("-", symbol, Integer.toString(row), Integer.toString(column)));
     }
 
     /**
@@ -211,9 +211,9 @@ public @Data class TicTacToe {
      * @param moveData Integer array containing position and coordinate
      * @return false if move data is invalid
      */
-    public boolean Move(int[] moveData) {
+    public boolean move(int[] moveData) {
         if (moveData.length == 2)
-            return Move(moveData[0], moveData[1]);
+            return move(moveData[0], moveData[1]);
         else return false;
     }
 
@@ -225,8 +225,8 @@ public @Data class TicTacToe {
     ///     Format: Symbol-Row-Column
     /// </param>
     /// <returns>True if move is valid</returns>
-    public boolean Move(String move) {
-        return Move(move.split("-"));
+    public boolean move(String move) {
+        return move(move.split("-"));
     }
 
     /// <summary>
@@ -234,8 +234,8 @@ public @Data class TicTacToe {
     /// </summary>
     /// <param name="move">Move data</param>
     /// <returns>True if move is valid</returns>
-    public boolean Move(String[] move) {
-        if (!IsValidMove(move) || IsGameOver()) return false;
+    public boolean move(String[] move) {
+        if (!isValidMove(move) || isGameOver()) return false;
         String symbol = move[0];
         int row = Integer.parseInt(move[1]);
         int col = Integer.parseInt(move[2]);
@@ -254,15 +254,15 @@ public @Data class TicTacToe {
     ///     Randomize a move from computer
     /// </summary>
     /// <returns>Integer array representing the coordinate of the move</returns>
-    public int[] RandomComputerMoveIntegerArray() {
-        if (IsGameOver())
+    public int[] randomComputerMoveIntegerArray() {
+        if (isGameOver())
             return new int[]{-1, -1};
         Random r = new Random();
         int row, column;
         do {
             row = r.nextInt(boardSize);
             column = r.nextInt(boardSize);
-        } while (!IsValidMove(row, column));
+        } while (!isValidMove(row, column));
 
         return new int[]{row, column};
     }
@@ -271,17 +271,17 @@ public @Data class TicTacToe {
     ///     Check if game is over
     /// </summary>
     /// <returns>True if game over</returns>
-    public boolean IsGameOver() {
+    public boolean isGameOver() {
         return !Strings.isNullOrEmpty(getWinner());
     }
 
     public String getWinner() {
-        this.winner = "";
-        if (IsWinner(p1Symbol))
+        String winner = "";
+        if (isWinner(p1Symbol))
             winner = p1Name;
-        else if (IsWinner(p2Symbol))
+        else if (isWinner(p2Symbol))
             winner = p2Name;
-        else if (IsFilled())
+        else if (isFilled())
             winner = "No one";
 
         return winner;
@@ -292,25 +292,23 @@ public @Data class TicTacToe {
     /// </summary>
     /// <param name="symbol">Symbol needed to check</param>
     /// <returns>True if winner</returns>
-    public boolean IsWinner(String symbol) {
+    public boolean isWinner(String symbol) {
+        symbol = symbol.toUpperCase();
         // Check rows
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
-                if (StringUtils.isBlank(board[i][j])) continue;
-                if (!board[i][j].equals(symbol)) break;
-
-                if (j == boardSize - 1) {
+                if (StringUtils.isBlank(board[i][j]) || !board[i][j].equals(symbol))
+                    break;
+                if (j == boardSize - 1)
                     return true;
-                }
             }
         }
 
         // Check columns
         for (int i = 0; i < boardSize; i++) {
             for (int j = 0; j < boardSize; j++) {
-                if (StringUtils.isBlank(board[j][i])) continue;
-                if (!board[j][i].equals(symbol)) break;
-
+                if (StringUtils.isBlank(board[j][i]) || !board[j][i].equals(symbol))
+                    break;
                 if (j == boardSize - 1) {
                     return true;
                 }
@@ -319,9 +317,8 @@ public @Data class TicTacToe {
 
         // Check diagonals left to right
         for (int i = 0; i < boardSize; i++) {
-            if (StringUtils.isBlank(board[i][i])) continue;
-            if (!board[i][i].equals(symbol)) break;
-
+            if (StringUtils.isBlank(board[i][i]) || !board[i][i].equals(symbol))
+                break;
             if (i == boardSize - 1) {
                 return true;
             }
@@ -329,9 +326,9 @@ public @Data class TicTacToe {
 
         // Check diagonals right to left
         for (int i = 0; i < boardSize; i++) {
-            if (StringUtils.isBlank(board[i][boardSize - 1 - i])) continue;
-            if (!board[i][boardSize - 1 - i].equals(symbol)) break;
-
+            int j = boardSize - 1 - i;
+            if (StringUtils.isBlank(board[i][j]) || !board[i][j].equals(symbol))
+                break;
             if (i == boardSize - 1) {
                 return true;
             }
@@ -345,7 +342,7 @@ public @Data class TicTacToe {
     ///     Find the non-empty cells in the board
     /// </summary>
     /// <returns>True if there is no empty cell, false otherwise</returns>
-    public boolean IsFilled() {
+    public boolean isFilled() {
         for (int i = 0; i < boardSize; i++)
             for (int j = 0; j < boardSize; j++)
                 if (board[i][j] == null)
@@ -356,12 +353,13 @@ public @Data class TicTacToe {
     /// <summary>
     ///     Reset the game, but keep the players and symbols
     /// </summary>
-    public void Reset() {
+    public void reset() {
         turnHistory.clear();
         board = new String[boardSize][boardSize];
         boardHistory.clear();
         startTime = Instant.now();
         endTime = Instant.now();
+        currentPlayer = 0;
     }
 
     /// <summary>
@@ -370,7 +368,7 @@ public @Data class TicTacToe {
     /// <param name="row"></param>
     /// <param name="column"></param>
     /// <returns>True if successful</returns>
-    public boolean UndoMove(int row, int column) {
+    public boolean undoMove(int row, int column) {
         if (row < 0 || row > boardSize || column < 0 || column > boardSize ||
                 StringUtils.isBlank(board[row][column]))
             return false;
