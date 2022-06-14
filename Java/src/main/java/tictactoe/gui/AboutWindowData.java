@@ -49,7 +49,7 @@ public class AboutWindowData {
         return StringSubstitutor.replace(template, hashMap);
     }
 
-    public String gettAbout() {
+    public String gettAbout() { // Tested
         return returnTAbout(tAbout);
     }
 }
