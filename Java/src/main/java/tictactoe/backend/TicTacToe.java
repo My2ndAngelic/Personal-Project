@@ -337,6 +337,7 @@ public class TicTacToe {
         return false;
     }
     // There is a TicTaxToe.Computer.Minimax.cs file but it is copied code from G4G so it is not suitable for submission
+    // No there isn't in Java.
 
     /// <summary>
     ///     Find the non-empty cells in the board
@@ -350,9 +351,9 @@ public class TicTacToe {
         return true;
     }
 
-    /// <summary>
-    ///     Reset the game, but keep the players and symbols
-    /// </summary>
+    /**
+     * Reset the game, but keep the players and symbols
+     */
     public void reset() {
         turnHistory.clear();
         board = new String[boardSize][boardSize];
@@ -362,22 +363,12 @@ public class TicTacToe {
         currentPlayer = 0;
     }
 
-    /// <summary>
-    ///     Undo last move
-    /// </summary>
-    /// <param name="row"></param>
-    /// <param name="column"></param>
-    /// <returns>True if successful</returns>
-    public boolean undoMove(int row, int column) {
-        if (row < 0 || row > boardSize || column < 0 || column > boardSize ||
-                StringUtils.isBlank(board[row][column]))
-            return false;
-        board[row][column] = null;
-        turnHistory.remove(turnHistory.size() - 1);
-        boardHistory.remove(boardHistory.size() - 1);
-        return true;
-    }
 
+    /**
+     * Get the symbol of current player
+     * @param currentPlayer Current player number
+     * @return Symbol of the current player
+     */
     private String getSymbol(int currentPlayer) {
         switch (currentPlayer % 2) {
             case 0 -> {

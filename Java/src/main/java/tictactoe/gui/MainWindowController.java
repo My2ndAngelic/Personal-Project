@@ -16,7 +16,6 @@ import org.apache.commons.text.StringSubstitutor;
 import tictactoe.backend.TicTacToe;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class MainWindowController {
@@ -110,10 +109,15 @@ public class MainWindowController {
         if (!isComputerTurn || ttt.isGameOver()) return; // If computer is not playing or game is over, do nothing
 
         int[] data = ttt.randomComputerMoveIntegerArray(); // Get computer move
+
+        // Find the button
         int row = data[0];
         int column = data[1];
-        System.out.println(Arrays.toString(new int[]{row, column}));
-        ((Button) FieldOfPlay.getChildren().filtered(x -> GridPane.getRowIndex(x) == row && GridPane.getColumnIndex(x) == column).get(0)).fire();
+
+        // Fire the action event
+        ((Button) FieldOfPlay.getChildren()
+                .filtered(x -> GridPane.getRowIndex(x) == row && GridPane.getColumnIndex(x) == column)
+                .get(0)).fire();
     }
 
     private HashMap<String, String> stringsHashMap() {
@@ -126,7 +130,7 @@ public class MainWindowController {
         }};
     }
 
-    private HashMap<String, String> stringsHashMap(int row, int column) {
+    private <T extends Number> HashMap<String, String> stringsHashMap(T row, T column) {
         return new HashMap<>() {{
             putAll(stringsHashMap());
             put("row", String.valueOf(row));

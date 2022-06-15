@@ -448,6 +448,7 @@ namespace TicTacToeBackendLibrary
             boardHistory.Clear();
             startTime = DateTime.Now;
             endTime = DateTime.Now;
+            currentPlayer = 0;
         }
 
         /// <summary>
