@@ -7,21 +7,19 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class AboutWindowController {
-
-
     @FXML
     private Label tfTitle;
     @FXML
     private Label taAbout;
 
     @FXML
-    public void onButtonOKClick(MouseEvent mouseEvent) {
+    private void onButtonOKClick(MouseEvent mouseEvent) {
         ((Stage) (((Button) mouseEvent.getSource()).getScene().getWindow())).close();
     }
 
     @FXML
     public void initialize() {
-        tfTitle.setText(AboutWindowData.tTitle);
+        tfTitle.setText(AboutWindowData.tTitle());
         taAbout.setText(AboutWindowData.tAbout());
     }
 }

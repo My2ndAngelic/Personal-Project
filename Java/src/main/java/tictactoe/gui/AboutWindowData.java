@@ -1,6 +1,5 @@
 package tictactoe.gui;
 
-import lombok.Getter;
 import org.apache.commons.text.StringSubstitutor;
 
 import java.time.ZonedDateTime;
@@ -8,13 +7,16 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 public record AboutWindowData() {
-    public static String tTitle = "About Tic Tac Toe JavaFX";
+    static String tTitle()
+    {
+        return "About Tic Tac Toe JavaFX";
+    }
 
     /**
      * Dear Java, please put String interpolation in your language. Thank you.
      * @return
      */
-    public static String tAbout() {
+    static String tAbout() {
         return StringSubstitutor.replace("""
                 Designed by ${name} in ${time}.
                 Version: ${version}

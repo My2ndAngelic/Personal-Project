@@ -13,6 +13,8 @@ import org.apache.commons.text.StringSubstitutor;
 import tictactoe.backend.TicTacToe;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.FileSystemException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collections;
@@ -44,7 +46,7 @@ public class MainWindowController {
 //    }
 
     @FXML
-    public void initialize() {
+    protected void initialize() {
         SysInfo.setText("Save folder: " + folderPath);
         listMoveHistory.setItems(leList);
         listMoveHistory.setStyle("-fx-font-size: 15px;");
@@ -84,13 +86,11 @@ public class MainWindowController {
             button.setText(ttt.getP2Symbol());
             button.setStyle("-fx-text-fill: blue");
         }
-        p1Turn = !p1Turn;
-
-
         // Disable the button
         button.setDisable(true);
 
-        // ListMoveHistory.DataContext.
+        p1Turn = !p1Turn;
+
         CheckGameStatus(); // Check the game status
 
         // Check if computer vs computer mode
@@ -105,6 +105,9 @@ public class MainWindowController {
         ComputerMove(); // Computer move
     }
 
+    /**
+     *
+     */
     private void ComputerMove() {
         if (!isComputerTurn || ttt.isGameOver()) return; // If computer is not playing or game is over, do nothing
 
@@ -233,13 +236,22 @@ public class MainWindowController {
     @FXML
     protected void onMenuSaveAction(ActionEvent actionEvent) {
         if (!ttt.isGameOver()) {
-            new Alert(Alert.AlertType.ERROR, "Game is not over. Please finish the game before saving.", ButtonType.OK);
+            new Alert(Alert.AlertType.ERROR, "Game is not over. Please finish the game before saving.", ButtonType.OK).showAndWait();
+            return;
         }
 
         try {
-            Files.write(Paths.get(folderPath, String.join(String.valueOf(ttt.getStartTime().toEpochMilli()), ".mhf")), Collections.singleton(ttt.toString()));
+            Files.write(Paths.get(folderPath, String.join("", String.valueOf(ttt.getStartTime().toEpochMilli()), ".mhf")), Collections.singleton(ttt.toString()), StandardCharsets.UTF_16);
+        } catch (SecurityException e) {
+            new Alert(Alert.AlertType.ERROR,String.format("Cannot write file due to IOException. Please select another folder and try again. Message: %s%n", e), ButtonType.OK).showAndWait();
+            return;
+        } catch (FileSystemException e) {
+            new Alert(Alert.AlertType.ERROR,String.format("Cannot write file due to FileSystemException. Please select another folder and try again. Message: %s%n", e), ButtonType.OK).showAndWait();
+            return;
         } catch (IOException e) {
-            new Alert(Alert.AlertType.ERROR, "Error writing file", ButtonType.OK);
+            new Alert(Alert.AlertType.ERROR,String.format("Cannot write file due to FileSystemException. Please select another folder and try again. Message: %s%n", e), ButtonType.OK).showAndWait();
+            return;
         }
+        new Alert(Alert.AlertType.INFORMATION, "Match saved successfully.", ButtonType.OK).show();
     }
 }
