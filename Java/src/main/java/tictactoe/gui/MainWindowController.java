@@ -225,11 +225,17 @@ public class MainWindowController {
         leList.clear();
     }
 
-    public void onMenuDebugAction(ActionEvent actionEvent) {
+    @FXML
+    protected void onMenuDebugAction(ActionEvent actionEvent) {
 
     }
 
-    public void onMenuSaveAction(ActionEvent actionEvent) {
+    @FXML
+    protected void onMenuSaveAction(ActionEvent actionEvent) {
+        if (!ttt.isGameOver()) {
+            new Alert(Alert.AlertType.ERROR, "Game is not over. Please finish the game before saving.", ButtonType.OK);
+        }
+
         try {
             Files.write(Paths.get(folderPath, String.join(String.valueOf(ttt.getStartTime().toEpochMilli()), ".mhf")), Collections.singleton(ttt.toString()));
         } catch (IOException e) {

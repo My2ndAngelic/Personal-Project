@@ -21,7 +21,7 @@ public class AboutWindowController {
 
     @FXML
     public void initialize() {
-        tfTitle.setText(new AboutWindowData().getTTitle());
-        taAbout.setText(new AboutWindowData().gettAbout());
+        tfTitle.setText(AboutWindowData.tTitle);
+        taAbout.setText(AboutWindowData.tAbout());
     }
 }
