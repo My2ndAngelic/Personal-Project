@@ -47,7 +47,7 @@
                 <MenuItem mnemonicParsing="false" onAction="#onMenuEvEAction" text="EvE" />
             </Menu>
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Save" />
+            <MenuItem mnemonicParsing="false" onAction="#onMenuSaveAction" text="Save" />
             <MenuItem fx:id="menuItemSelectFolder" mnemonicParsing="false" onAction="#onMenuSelectFolderAction" text="Select Folder" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" onAction="#onMenuExitAction" text="Quit" />

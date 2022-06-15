@@ -5,10 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
@@ -16,6 +13,9 @@ import org.apache.commons.text.StringSubstitutor;
 import tictactoe.backend.TicTacToe;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class MainWindowController {
@@ -227,5 +227,13 @@ public class MainWindowController {
 
     public void onMenuDebugAction(ActionEvent actionEvent) {
 
+    }
+
+    public void onMenuSaveAction(ActionEvent actionEvent) {
+        try {
+            Files.write(Paths.get(folderPath, String.join(String.valueOf(ttt.getStartTime().toEpochMilli()), ".mhf")), Collections.singleton(ttt.toString()));
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR, "Error writing file", ButtonType.OK);
+        }
     }
 }
