@@ -14,7 +14,6 @@ import tictactoe.backend.TicTacToe;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.FileSystemException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Collections;
@@ -242,14 +241,14 @@ public class MainWindowController {
 
         try {
             Files.write(Paths.get(folderPath, String.join("", String.valueOf(ttt.getStartTime().toEpochMilli()), ".mhf")), Collections.singleton(ttt.toString()), StandardCharsets.UTF_16);
-        } catch (SecurityException e) {
-            new Alert(Alert.AlertType.ERROR,String.format("Cannot write file due to IOException. Please select another folder and try again. Message: %s%n", e), ButtonType.OK).showAndWait();
-            return;
-        } catch (FileSystemException e) {
-            new Alert(Alert.AlertType.ERROR,String.format("Cannot write file due to FileSystemException. Please select another folder and try again. Message: %s%n", e), ButtonType.OK).showAndWait();
-            return;
         } catch (IOException e) {
-            new Alert(Alert.AlertType.ERROR,String.format("Cannot write file due to FileSystemException. Please select another folder and try again. Message: %s%n", e), ButtonType.OK).showAndWait();
+            switch (e.getClass().getSimpleName()) {
+                case "SecurityException" ->
+                        new Alert(Alert.AlertType.ERROR,String.format("Permission denied. Please select another folder and try again. Message: %s%n", e), ButtonType.OK).showAndWait();
+                case "FileSystemException" ->
+                        new Alert(Alert.AlertType.ERROR,String.format("Cannot write file to selected folder. Please select another folder and try again. Message: %s%n", e), ButtonType.OK).showAndWait();
+                default -> new Alert(Alert.AlertType.ERROR,String.format("Message: %s%n", e), ButtonType.OK).showAndWait();
+            }
             return;
         }
         new Alert(Alert.AlertType.INFORMATION, "Match saved successfully.", ButtonType.OK).show();
