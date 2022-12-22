@@ -8,7 +8,6 @@ module me.my2ndangelic {
     requires org.apache.commons.text;
     requires com.google.common;
     requires lombok;
-    requires annotations;
 
     opens tictactoe.gui to javafx.fxml;
     exports tictactoe.gui;

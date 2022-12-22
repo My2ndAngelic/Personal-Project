@@ -11,24 +11,24 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junit.version>5.8.2</junit.version>
+        <junit.version>5.9.0</junit.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>18.0.1</version>
+            <version>19</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>18.0.1</version>
+            <version>19</version>
         </dependency>
         <dependency>
             <groupId>org.controlsfx</groupId>
             <artifactId>controlsfx</artifactId>
-            <version>11.1.1</version>
+            <version>11.1.2</version>
         </dependency>
         <dependency>
             <groupId>com.dlsc.formsfx</groupId>
@@ -86,12 +86,12 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
-            <version>1.9</version>
+            <version>1.10.0</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
-            <version>13.0</version>
+            <version>23.1.0</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
