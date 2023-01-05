@@ -1,30 +1,13 @@
 package aoc.AoC2022;
 
-import java.io.IOException;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 public class AoC1 {
-    public static void main(String[] args) throws IOException {
-        String temp0 = "1000\n" +
-                "2000\n" +
-                "3000\n" +
-                "\n" +
-                "4000\n" +
-                "\n" +
-                "5000\n" +
-                "6000\n" +
-                "\n" +
-                "7000\n" +
-                "8000\n" +
-                "9000\n" +
-                "\n" +
-                "10000";
-
-        String temp = AoCUtilities.fileImportToString(Path.of(System.getProperty("user.dir"),"/src/main/java/aoc/AoC2022/input/input1.txt").toString());
-
-        ArrayList<String> ali = new ArrayList<>(Arrays.stream(temp.split("\n\n")).toList());
+    private static ArrayList<Integer> summedList(String dataIn) {
+        ArrayList<String> ali = new ArrayList<>(Arrays.stream(dataIn.split("\n\n")).toList());
         ArrayList<String[]> ali2 = new ArrayList<>();
         for (String s : ali) {
             ali2.add(s.split("\n"));
@@ -37,7 +20,29 @@ public class AoC1 {
             }
             ali3.add(counter);
         }
+        return ali3;
+    }
 
-        System.out.println(ali3);
+    public static long problemOne(String dataIn) {
+        ArrayList<Integer> leSum = summedList(dataIn);
+
+        Integer max = leSum.stream().sorted(Comparator.reverseOrder()).toList().get(0);
+
+//        int max = leSum.get(0);
+//        for (int x : leSum) {
+//            if (x > max) {
+//                max = x;
+//            }
+//        }
+
+        return max;
+    }
+
+    public static long problemTwo(String dataIn) {
+        ArrayList<Integer> leSum = summedList(dataIn);
+
+        List<Integer> leSortedList = leSum.stream().sorted(Comparator.reverseOrder()).toList();
+
+        return leSortedList.get(0) + leSortedList.get(1) + leSortedList.get(2);
     }
 }

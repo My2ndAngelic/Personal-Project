@@ -7,7 +7,7 @@ namespace AoC2020
     {
         public static void D2()
         {
-            var a = Utilities.FileReaderFromDayNo(2);
+            var a = Utilities.FileReaderFromDayNoStringArray(2);
 
             // Password rule
             var b1 = new int[a.Length];

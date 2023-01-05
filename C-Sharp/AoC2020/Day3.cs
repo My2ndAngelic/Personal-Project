@@ -7,7 +7,7 @@ namespace AoC2020
     {
         public static void D3()
         {
-            var a = Utilities.FileReaderFromDayNo(3);
+            var a = Utilities.FileReaderFromDayNoStringArray(3);
 
             int TreeCounter(string[] array, int right, int down)
             {

@@ -6,9 +6,8 @@ namespace AoC2020
     {
         public static void D1()
         {
-            Console.WriteLine("Hello World!");
             Console.WriteLine();
-            var a = Utilities.FileReaderFromDayNo(1);
+            var a = Utilities.FileReaderFromDayNoStringArray(1);
             var data = new int[a.Length];
             for (var i = 0; i < a.Length; i++) data[i] = int.Parse(a[i]);
 

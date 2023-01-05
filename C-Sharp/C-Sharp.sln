@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToeBackendLibrary", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground", "Playground\Playground.csproj", "{FB0505FC-A933-4323-BFBB-AA4E079D0F57}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AoC2022", "AoC2022\AoC2022.csproj", "{ACBE5692-194B-46FB-AD57-10B348E00AC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|anycpu = Debug|anycpu
@@ -45,6 +47,10 @@ Global
 		{FB0505FC-A933-4323-BFBB-AA4E079D0F57}.Debug|anycpu.Build.0 = Debug|Any CPU
 		{FB0505FC-A933-4323-BFBB-AA4E079D0F57}.Release|anycpu.ActiveCfg = Release|Any CPU
 		{FB0505FC-A933-4323-BFBB-AA4E079D0F57}.Release|anycpu.Build.0 = Release|Any CPU
+		{ACBE5692-194B-46FB-AD57-10B348E00AC1}.Debug|anycpu.ActiveCfg = Debug|Any CPU
+		{ACBE5692-194B-46FB-AD57-10B348E00AC1}.Debug|anycpu.Build.0 = Debug|Any CPU
+		{ACBE5692-194B-46FB-AD57-10B348E00AC1}.Release|anycpu.ActiveCfg = Release|Any CPU
+		{ACBE5692-194B-46FB-AD57-10B348E00AC1}.Release|anycpu.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

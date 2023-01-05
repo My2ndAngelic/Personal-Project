@@ -5,7 +5,7 @@ namespace AoC2020
 {
     public static class Utilities
     {
-        public static string[] FileReaderFromDayNo(int dayNo)
+        public static string[] FileReaderFromDayNoStringArray(int dayNo)
         {
             try
             {
