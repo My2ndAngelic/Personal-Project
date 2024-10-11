@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace CSharp_DNC
 {
@@ -45,7 +46,7 @@ namespace CSharp_DNC
 
         public static void Main(string[] args)
         {
-            Console.WriteLine(Coordinate2D("(6, 9), (9, 6)"));
+            Console.WriteLine(0.00000005.ToString(CultureInfo.CurrentCulture));
         }
     }
 }
