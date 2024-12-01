@@ -1,5 +1,6 @@
 package aoc.AoC2022;
 
+import aoc.AoCUtilities;
 import lombok.SneakyThrows;
 
 import java.lang.reflect.Method;

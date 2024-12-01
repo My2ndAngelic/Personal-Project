@@ -1,4 +1,4 @@
-package aoc.AoC2022;
+package aoc;
 
 import java.io.BufferedReader;
 import java.io.File;
