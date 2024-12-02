@@ -5,10 +5,10 @@ module me.my2ndangelic {
     requires com.dlsc.formsfx;
     requires org.kordamp.ikonli.javafx;
     requires lombok;
-//    requires org.apache.commons.lang3;
-//    requires org.apache.commons.text;
-//    requires com.google.common;
+    requires com.google.common;
+    requires org.apache.commons.lang3;
+    requires org.apache.commons.text;
 
-//    opens tictactoe.gui to javafx.fxml;
-//    exports tictactoe.gui;
+    opens tictactoe.gui to javafx.fxml;
+    exports tictactoe.gui;
 }
