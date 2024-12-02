@@ -9,6 +9,17 @@ import java.util.Scanner;
 import java.util.function.Function;
 
 public class AoCUtils {
+
+    /**
+     *
+     * @param path
+     * @param mapper
+     * @param listType
+     * @return
+     * @param <ElementType>
+     * @param <ListType>
+     * @throws FileNotFoundException
+     */
     public static <ElementType, ListType> List<ElementType> fileImportToGeneric(String path, Function<String, ElementType> mapper   , Class<ListType> listType) throws FileNotFoundException {
         File myFile = new File(path);
         Scanner sc = new Scanner(myFile);
